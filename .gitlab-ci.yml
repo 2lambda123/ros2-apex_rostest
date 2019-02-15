@@ -1,0 +1,36 @@
+stages:
+  - build
+  - test
+
+before_script:
+  - source /opt/ros/bouncy/setup.bash
+
+build_launchtest:
+  stage: build
+  image: osrf/ros2:bouncy-desktop
+  script:
+    - colcon build --packages-up-to apex_launchtest
+
+build_launchtest_ros:
+  stage: build
+  image: osrf/ros2:bouncy-desktop
+  script:
+    - colcon build --packages-up-to apex_launchtest_ros
+
+build_all:
+  stage: build
+  image: osrf/ros2:bouncy-desktop
+  script:
+    - colcon build
+
+# test_launchtest:
+#   stage: test
+#   image: osrf/ros2:bouncy-desktop
+#   dependencies:
+#     - build_launchtest
+# 
+# test_launchtest_ros:
+#   stage: test
+#   image: osrf/ros2:bouncy-desktop
+#   dependencies:
+#     - build_launchtest_ros
